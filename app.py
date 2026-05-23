@@ -1,4 +1,3 @@
-python3 -c "
 import http.server, socketserver, os, sys, socket
 from concurrent.futures import ThreadPoolExecutor
 
@@ -73,4 +72,3 @@ with PoolTCPServer(('', PORT), FastHandler) as httpd:
     print(f'Socket timeout: {SOCKET_TIMEOUT}s, HTTP timeout: {REQUEST_TIMEOUT}s')
     sys.stdout.flush()
     httpd.serve_forever()
-"
