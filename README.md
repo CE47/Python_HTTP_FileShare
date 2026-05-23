@@ -1,28 +1,36 @@
-# Fast Multi‑Threaded HTTP File Server
+# ⚡ Zero‑Config Multi‑Threaded HTTP File Server
 
-A drop‑in replacement for `python3 -m http.server` that handles **multiple concurrent downloads** with a thread pool, socket timeouts, cache headers, and automatic IP detection.
+**Single‑file Python HTTP file share** – the fastest way to share files over your local network.
 
-Perfect for quickly sharing files from your laptop or server with several users – without any extra dependencies.
+> No dependencies. No config files. Just copy, paste, and share.
+
+## Why this instead of `python3 -m http.server`?
+
+The built‑in server is **single‑threaded** – one download blocks all others.  
+This server is **multi‑threaded**, handles **concurrent downloads**, and automatically shows you the IP addresses to use.
+
+Perfect for:
+- **LAN file sharing** with multiple colleagues
+- **Ad‑hoc file exchange** between devices
+- **Quickly serving static assets** during development
+- **Replacing the slow default server** without any extra setup
 
 ## Features
 
-- 🚀 **Concurrent downloads** – fixed thread pool (auto‑scaled to 4× CPU cores, min 10)
-- 🌐 **Auto‑IP detection** – shows all non‑loopback IPv4 addresses on startup
-- ⏱️ **Timeouts** – socket timeout (5s) and HTTP request timeout (30s) prevent hanging clients
-- 📦 **Cache headers** – `Cache-Control: public, max‑age=3600` reduces repeated downloads
-- 🔁 **Port reuse** – `allow_reuse_address = True` avoids “address already in use” errors
-- 🧹 **Clean shutdown** – `daemon_threads = True` + executor shutdown on `Ctrl+C`
-- 📁 **Serves current directory** – just like the standard `http.server`
-- 🔇 **No logging** – suppresses per‑request output for maximum performance
+| Feature | Benefit |
+|---------|---------|
+| 🧵 **Thread pool** | Handles many simultaneous downloads (auto‑scaled to 4× CPU cores) |
+| 🌐 **Auto‑IP display** | Shows all reachable IPv4 addresses on startup – no more `ifconfig` |
+| ⏱️ **Timeouts** | 5s socket + 30s HTTP timeout – prevents hanging clients |
+| 📦 **Cache headers** | Browsers cache files for 1 hour – reduces redundant requests |
+| 🔁 **Port reuse** | No “address already in use” errors on restart |
+| 🧹 **Clean shutdown** | `Ctrl+C` stops gracefully without orphan threads |
+| 🔇 **No logging** | Maximises throughput by skipping per‑request I/O |
+| 📁 **Serves current directory** | Just like `http.server`, but **way faster** |
 
-## Requirements
+## Quick Start
 
-- **Python 3.6+** (uses `f‑strings` and `concurrent.futures`)
-- No third‑party packages – only the standard library.
-
-## Usage
-
-### One‑liner (copy & paste into terminal)
+### One‑liner (copy & paste into any terminal)
 
 ```bash
 python3 -c "
